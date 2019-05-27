@@ -16,6 +16,6 @@ You need to create a console application based on the database from homework 1, 
           - a list of all Java developers;
      
           - a list of all middle developers;
-     
+          
           - list of projects in the following format: creation date - project name,
-          the amount of developers on this project.
+          the amount of developers on this project;
