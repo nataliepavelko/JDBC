@@ -1,19 +1,15 @@
 # JDBC
-Необходимо создать консольное приложение на основе БД из домашнего задания 1, которое:
+You need to create a console application based on the database from homework 1, which:
 
 
-- соединяется с БД
+- connects to the database
 
-- позволяет выполнять CRUD (CREATE, READ, UPDATE, DELETE) операции;
+- allows you to perform CRUD (CREATE, READ, UPDATE, DELETE) operations;
 
-- вывести на консоль:
+- output to console:
 
-    - зарплату(сумму) всех разработчиков отдельного проекта;
-
-    - список разработчиков отдельного проекта;
-
-    - список всех Java разработчиков;
-
-    - список всех middle разработчиков;
-
-    - список проектов в следующем формате: дата создания - название проекта - количество разработчиков на этом проекте.
+     - salary (amount) of all developers of a separate project;
+     - list of developers of a separate project;
+     - a list of all Java developers;
+     - a list of all middle developers;
+     - list of projects in the following format: creation date - project name - the amount of developers on this project.
