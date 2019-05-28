@@ -20,13 +20,13 @@ public class AnotherCommands {
     }
 
     public void desc() {
-        System.out.println(" \n -- Menu with additional commands --  \n" );
+        System.out.println(" \n -- Menu with additional commands --  \n");
 
         System.out.println("   Choose a number of command from the list, please : ");
         System.out.println("1. Show the salary (amount) of all developers of a separate project ");
-        System.out.println("2. Show the list of developers of a separate project");
-        System.out.println("3. Show the list of all Java developers ");
-        System.out.println("4. Show list of all Middle developers");
+        System.out.println("2. Show a list of all developers of a separate project");
+        System.out.println("3. Show a list of all Java developers ");
+        System.out.println("4. Show a list of all Middle developers");
         System.out.println("5. Show amount of developers of all projects");
         System.out.println("6. Go to main menu ");
         System.out.println("7. Exit ");
@@ -87,7 +87,7 @@ public class AnotherCommands {
         if (project != null) {
             if (developerList != null) {
                 int sum = developersDao.getSumSalaryDevelopers(id);
-                System.out.println("Sum salary for " + developerList.size() + "developers id " +sum);
+                System.out.println("Sum salary for " + developerList.size() + "developers id " + sum);
             } else {
                 System.out.println("Developers table is empty");
             }
@@ -101,7 +101,9 @@ public class AnotherCommands {
         List<Project> projectList = projectsDao.getAll();
 
         if (projectList != null) {
-            projectList.forEach(project -> { System.out.println(project); });
+            projectList.forEach(project -> {
+                System.out.println(project);
+            });
         } else {
             System.out.println("Projects table is empty");
         }
@@ -113,7 +115,9 @@ public class AnotherCommands {
         if (project != null) {
             if (developerList != null) {
                 System.out.println("");
-                developerList.forEach(developer -> { System.out.println(developer);});
+                developerList.forEach(developer -> {
+                    System.out.println(developer);
+                });
             } else {
                 System.out.println("Developers table is empty");
             }
@@ -123,19 +127,23 @@ public class AnotherCommands {
     }
 
     private void listJavaDevelopers() {
-        List <Developer> developerList = developersDao.getAllJavaDevelopers();
+        List<Developer> developerList = developersDao.getAllJavaDevelopers();
         System.out.println(" -- All Java developers -- ");
-        if(developerList != null) {
-            developerList.forEach(developer -> { System.out.println(developer); });
+        if (developerList != null) {
+            developerList.forEach(developer -> {
+                System.out.println(developer);
+            });
         } else {
             System.out.println("Java developers not exist");
         }
     }
 
     private void listMiddleDevelopers() {
-        List <Developer> developerList = developersDao.getAllMiddleDevelopers();
-        if(developerList != null) {
-            developerList.forEach(developer -> { System.out.println(developer); });
+        List<Developer> developerList = developersDao.getAllMiddleDevelopers();
+        if (developerList != null) {
+            developerList.forEach(developer -> {
+                System.out.println(developer);
+            });
         } else {
             System.out.println("Middle developers not exist");
         }
@@ -145,7 +153,9 @@ public class AnotherCommands {
     private void amountDevelopersOfProject() {
         List projectList = developersDao.getListProjectAmountDevelopers();
         if (projectList != null) {
-            projectList.forEach(project -> { System.out.println(project);});
+            projectList.forEach(project -> {
+                System.out.println(project);
+            });
         } else {
             System.out.println("Projects table is empty");
         }

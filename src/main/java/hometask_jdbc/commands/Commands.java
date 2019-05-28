@@ -1,7 +1,5 @@
 package hometask_jdbc.commands;
 
-import java.sql.SQLException;
-
 public interface Commands {
     void desc();
 
@@ -14,7 +12,5 @@ public interface Commands {
     void showAll();
 
     void deleteByID ();
-
-
 
 }

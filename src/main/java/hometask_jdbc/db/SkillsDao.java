@@ -15,10 +15,10 @@ public class SkillsDao {
     private PreparedStatement updatePS;
     private PreparedStatement getAllPS;
     private Statement statement;
-    private Connection connection ;
+    private Connection connection;
 
 
-    public SkillsDao()  {
+    public SkillsDao() {
 
         try {
             initDriver();
@@ -35,10 +35,11 @@ public class SkillsDao {
             getByIdPS = connection.prepareStatement("SELECT name, level FROM skills WHERE id =? ");
             updatePS = connection.prepareStatement("UPDATE skills SET name =?, level=? WHERE id=?");
             getAllPS = connection.prepareStatement("SELECT id, name, level FROM skills");
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     private void initDriver() {
         try {
             Class.forName(fullDriverClassname);
@@ -47,8 +48,8 @@ public class SkillsDao {
         }
     }
 
-    private void setConnector () throws SQLException {
-        connection = DriverManager.getConnection(DB_Path, USER,PASSWORD);
+    private void setConnector() throws SQLException {
+        connection = DriverManager.getConnection(DB_Path, USER, PASSWORD);
         statement = connection.createStatement();
     }
 
@@ -62,22 +63,20 @@ public class SkillsDao {
     }
 
 
-
-
     public Skill getById(Long id) {
         try {
             getByIdPS.setLong(1, id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try (ResultSet rs = getByIdPS.executeQuery()){
-            while (rs.first()){
+        try (ResultSet rs = getByIdPS.executeQuery()) {
+            while (rs.first()) {
                 return new Skill(id,
                         rs.getString("name"),
                         rs.getString("level"));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -85,15 +84,15 @@ public class SkillsDao {
 
     public List<Skill> getAll() {
         List<Skill> skillList = new ArrayList<>();
-        try (ResultSet rs = getAllPS.executeQuery() ){
-            while (rs.next()){
-                skillList.add( new Skill(
+        try (ResultSet rs = getAllPS.executeQuery()) {
+            while (rs.next()) {
+                skillList.add(new Skill(
                         rs.getLong("id"),
                         rs.getString("name"),
                         rs.getString("level")
-                        ));
+                ));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return skillList;
@@ -116,6 +115,7 @@ public class SkillsDao {
             e.printStackTrace();
         }
     }
+
     protected long getMaxFieldValue(String table, String field) throws SQLException {
         String sql = "select max(${field}) from " + table;
         sql = sql.replace("${field}", field);

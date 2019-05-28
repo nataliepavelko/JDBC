@@ -29,7 +29,7 @@ public class DeveloperCommands implements Commands {
         System.out.println("7. Exit ");
 
         String command = scanner.next();
-        switch (command){
+        switch (command) {
             case "1":
                 add();
                 desc();
@@ -58,7 +58,7 @@ public class DeveloperCommands implements Commands {
                 developersDao.close();
                 break;
             default:
-                System.out.println("Unknown command. Please, try again. " );
+                System.out.println("Unknown command. Please, try again. ");
                 desc();
         }
     }
@@ -67,13 +67,13 @@ public class DeveloperCommands implements Commands {
     @Override
     public void add() {
         System.out.println("Enter info for a new developer");
-        System.out.print("Name - ");
+        System.out.println("Name - ");
         String name = scanner.next();
-        System.out.print("Surname - ");
+        System.out.println("Surname - ");
         String surname = scanner.next();
-        System.out.print("Sex - ");
+        System.out.println("Sex - ");
         String sex = scanner.next();
-        System.out.print("Salary -  ");
+        System.out.println("Salary -  ");
         int salary = scanner.nextInt();
 
         Developer developer = new Developer();
@@ -97,7 +97,7 @@ public class DeveloperCommands implements Commands {
         Developer developer = developersDao.getById(id);
 
 
-        if (developer != null){
+        if (developer != null) {
             System.out.println(developer);
         } else {
             System.out.println("Developer with id " + id + " not exist");
@@ -107,15 +107,15 @@ public class DeveloperCommands implements Commands {
     @Override
     public void update() {
         System.out.println("Enter information for  developer update");
-        System.out.print("ID -  ");
+        System.out.println("ID -  ");
         long id = scanner.nextInt();
-        System.out.print("Name - ");
+        System.out.println("Name - ");
         String name = scanner.next();
-        System.out.print("Surname - ");
+        System.out.println("Surname - ");
         String surname = scanner.next();
-        System.out.print("Sex - ");
+        System.out.println("Sex - ");
         String sex = scanner.next();
-        System.out.print("Salary -  ");
+        System.out.println("Salary -  ");
         int salary = scanner.nextInt();
 
         Developer developer = new Developer();
@@ -126,8 +126,8 @@ public class DeveloperCommands implements Commands {
         developer.setId(id);
         if (developersDao.getById(id) != null) {
             developersDao.update(developer);
-            System.out.println("Developer with id + " + id + " is updated");
-        } else{
+            System.out.println("Developer with id " + id + " is updated");
+        } else {
             System.out.println("Developer with ID " + id + " not exist");
         }
     }
@@ -135,9 +135,9 @@ public class DeveloperCommands implements Commands {
     @Override
     public void showAll() {
 
-        List <Developer> developerList = developersDao.getAll();
-        if (developerList!= null){
-           developerList.forEach(developer -> { System.out.println(developer); });
+        List<Developer> developerList = developersDao.getAll();
+        if (developerList != null) {
+            developerList.forEach(developer -> { System.out.println(developer); });
         } else {
             System.out.println("Developers table is empty");
         }
@@ -151,7 +151,7 @@ public class DeveloperCommands implements Commands {
         if (developersDao.getById(id) != null) {
             developersDao.deleteById(id);
             System.out.println("Developer with ID + " + id + " was deleted");
-        } else{
+        } else {
             System.out.println("Developer with ID " + id + " not exist");
         }
     }

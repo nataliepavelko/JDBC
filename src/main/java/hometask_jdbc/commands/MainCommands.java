@@ -9,7 +9,7 @@ public class MainCommands {
         desc();
     }
 
-    private void desc(){
+    private void desc() {
         System.out.println(" --------- Main menu --------- \n");
 
         System.out.println("Choose a number of command from the list, please : ");
@@ -23,8 +23,8 @@ public class MainCommands {
 
 
         String command = scanner.next();
-        switch (command){
-            case "1" :
+        switch (command) {
+            case "1":
                 new DeveloperCommands();
                 break;
             case "2":
@@ -45,9 +45,9 @@ public class MainCommands {
             case "7":
                 System.out.println(" --------- Exit ---------");
                 break;
-                default:
-                    System.out.println("Unknown command. Try again. " );
-                    desc();
+            default:
+                System.out.println("Unknown command. Try again. ");
+                desc();
         }
     }
 }

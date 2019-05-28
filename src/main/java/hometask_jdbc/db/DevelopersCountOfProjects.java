@@ -40,6 +40,6 @@ public class DevelopersCountOfProjects {
         return "Project" +
                 " name = '" + name + '\'' +
                 ", date = '" + date + '\'' +
-                ", amount developers = " + amount ;
+                ", amount developers = " + amount;
     }
 }

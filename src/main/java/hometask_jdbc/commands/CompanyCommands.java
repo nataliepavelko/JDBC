@@ -2,6 +2,7 @@ package hometask_jdbc.commands;
 
 import hometask_jdbc.db.CompaniesDao;
 import hometask_jdbc.entity.Company;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -64,15 +65,15 @@ public class CompanyCommands implements Commands {
     }
 
     @Override
-    public void add()  {
+    public void add() {
         System.out.println("Enter info for a new company");
-        System.out.print("Name - " );
+        System.out.println("Name - ");
         String name = scanner.next();
         scanner.nextLine();
-        System.out.print("Address - ");
+        System.out.println("Address - ");
         String address = scanner.nextLine();
 
-        Company  company = new Company();
+        Company company = new Company();
         company.setName(name);
         company.setAddress(address);
         try {
@@ -80,7 +81,6 @@ public class CompanyCommands implements Commands {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         System.out.println("Added new company!");
     }
 
@@ -90,9 +90,9 @@ public class CompanyCommands implements Commands {
         long id = scanner.nextInt();
         Company company = companiesDao.getById(id);
 
-        if (company != null){
+        if (company != null) {
             System.out.println(company);
-        }else {
+        } else {
             System.out.println("Company not exist");
         }
     }
@@ -100,12 +100,12 @@ public class CompanyCommands implements Commands {
     @Override
     public void update() {
         System.out.println("Enter information for company update");
-        System.out.print("ID -  ");
+        System.out.println("ID -  ");
         long id = scanner.nextInt();
-        System.out.print("Name - ");
+        System.out.println("Name - ");
         String name = scanner.next();
         scanner.nextLine();
-        System.out.print("Address - ");
+        System.out.println("Address - ");
         String address = scanner.nextLine();
 
         Company company = new Company();
@@ -114,18 +114,19 @@ public class CompanyCommands implements Commands {
         company.setId(id);
         if (companiesDao.getById(id) != null) {
             companiesDao.update(company);
-            System.out.println("Company with id + " + id + " is updated");
-        } else{
+            System.out.println("Company with id " + id + " is updated");
+        } else {
             System.out.println("Company with ID " + id + " not exist");
         }
-
     }
 
     @Override
     public void showAll() {
         List<Company> companyList = companiesDao.getAll();
         if (companyList != null) {
-            companyList.forEach(company -> { System.out.println(company); });
+            companyList.forEach(company -> {
+                System.out.println(company);
+            });
         } else {
             System.out.println("Companies table is empty");
         }
@@ -134,15 +135,14 @@ public class CompanyCommands implements Commands {
     @Override
     public void deleteByID() {
         System.out.println("Enter ID to delete company ");
-        System.out.print("ID -  ");
+        System.out.println("ID -  ");
         long id = scanner.nextInt();
         if (companiesDao.getById(id) != null) {
             companiesDao.deleteById(id);
             System.out.println("Company with ID + " + id + " was deleted");
-        } else{
+        } else {
             System.out.println("Company with ID " + id + " not exist");
 
         }
-
     }
 }

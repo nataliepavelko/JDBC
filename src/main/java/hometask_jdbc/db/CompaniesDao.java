@@ -8,7 +8,7 @@ import java.util.List;
 
 import static hometask_jdbc.db.Connector.*;
 
-public class CompaniesDao implements AbstractDao <Company, Long> {
+public class CompaniesDao implements AbstractDao<Company, Long> {
 
     private PreparedStatement savePS;
     private PreparedStatement getByIdPS;
@@ -38,6 +38,7 @@ public class CompaniesDao implements AbstractDao <Company, Long> {
         }
 
     }
+
     private void initDriver() {
         try {
             Class.forName(fullDriverClassname);

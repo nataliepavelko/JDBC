@@ -17,7 +17,7 @@ public class SkillsCommands implements Commands {
 
     @Override
     public void desc() {
-        System.out.println("\n  -- Menu of table Skills --");
+        System.out.println("\n  -- Menu of table Skills -- \n");
 
         System.out.println("   Choose a number of command from the list, please : ");
         System.out.println("1. Create new skill ");
@@ -66,9 +66,9 @@ public class SkillsCommands implements Commands {
     @Override
     public void add() {
         System.out.println("Enter info for a new skill");
-        System.out.print("Name - ");
+        System.out.println("Name - ");
         String name = scanner.next();
-        System.out.print("Level - ");
+        System.out.println("Level - ");
         String level = scanner.next();
 
         Skill skill = new Skill();
@@ -97,9 +97,9 @@ public class SkillsCommands implements Commands {
     @Override
     public void update() {
         System.out.println("Enter information for skill update");
-        System.out.print("ID -  ");
+        System.out.println("ID -  ");
         long id = scanner.nextInt();
-        System.out.print("Name - ");
+        System.out.println("Name - ");
         String name = scanner.next();
         System.out.print("Level - ");
         String level = scanner.next();
@@ -110,8 +110,8 @@ public class SkillsCommands implements Commands {
         skill.setId(id);
         if (skillsDao.getById(id) != null) {
             skillsDao.update(skill);
-            System.out.println("Skill with id + " + id + " is updated");
-        } else{
+            System.out.println("Skill with id " + id + " is updated");
+        } else {
             System.out.println("Skill with ID " + id + " not exist");
         }
     }
@@ -120,9 +120,7 @@ public class SkillsCommands implements Commands {
     public void showAll() {
         List<Skill> skillList = skillsDao.getAll();
         if (skillList != null) {
-            skillList.forEach(skill -> {
-                System.out.println(skill);
-            });
+            skillList.forEach(skill -> { System.out.println(skill); });
         } else {
             System.out.println("Skills table is empty");
         }
@@ -136,7 +134,7 @@ public class SkillsCommands implements Commands {
         if (skillsDao.getById(id) != null) {
             skillsDao.deleteById(id);
             System.out.println("Skill with ID + " + id + " was deleted");
-        }else {
+        } else {
             System.out.println("Skill not exist");
         }
     }

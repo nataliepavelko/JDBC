@@ -56,10 +56,10 @@ public class Project {
     @Override
     public String toString() {
         return "Project{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", cost=" + cost +
-                ", date=" + date +
+                "id = " + id +
+                ", name = '" + name + '\'' +
+                ", cost = " + cost +
+                ", date = " + date +
                 '}';
     }
 }

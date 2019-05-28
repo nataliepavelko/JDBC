@@ -68,10 +68,10 @@ public class CustomerCommands implements Commands {
     @Override
     public void add() {
         System.out.println("Enter info for a new customer");
-        System.out.print("Name - ");
+        System.out.println("Name - ");
         String name = scanner.next();
         scanner.nextLine();
-        System.out.print("Phone - ");
+        System.out.println("Phone - ");
         String phone = scanner.nextLine();
 
         Customer customer = new Customer();
@@ -82,7 +82,6 @@ public class CustomerCommands implements Commands {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         System.out.println("Added new customer!");
     }
 
@@ -94,7 +93,7 @@ public class CustomerCommands implements Commands {
 
         if (customer != null) {
             System.out.println(customer);
-        }else {
+        } else {
             System.out.println("Customer not exist");
         }
     }
@@ -102,12 +101,12 @@ public class CustomerCommands implements Commands {
     @Override
     public void update() {
         System.out.println("Enter information for customer update");
-        System.out.print("ID -  ");
+        System.out.println("ID -  ");
         long id = scanner.nextInt();
-        System.out.print("Name - ");
+        System.out.println("Name - ");
         String name = scanner.next();
         scanner.nextLine();
-        System.out.print("Phone - ");
+        System.out.println("Phone - ");
         String phone = scanner.nextLine();
 
         Customer customer = new Customer();
@@ -116,8 +115,8 @@ public class CustomerCommands implements Commands {
         customer.setId(id);
         if (customersDao.getById(id) != null) {
             customersDao.update(customer);
-            System.out.println("Customer with id + " + id + " is updated");
-        } else{
+            System.out.println("Customer with id " + id + " is updated");
+        } else {
             System.out.println("Customer with ID " + id + " not exist");
         }
     }
@@ -126,8 +125,10 @@ public class CustomerCommands implements Commands {
     public void showAll() {
         List<Customer> customerList = customersDao.getAll();
 
-        if(customerList != null){
-            customerList.forEach(customer -> { System.out.println(customer); });
+        if (customerList != null) {
+            customerList.forEach(customer -> {
+                System.out.println(customer);
+            });
         } else {
             System.out.println("Customers table is empty");
         }
@@ -136,12 +137,12 @@ public class CustomerCommands implements Commands {
     @Override
     public void deleteByID() {
         System.out.println("Enter ID to delete company ");
-        System.out.print("ID - ");
+        System.out.println("ID - ");
         long id = scanner.nextInt();
         if (customersDao.getById(id) != null) {
             customersDao.deleteById(id);
             System.out.println("Customer with ID + " + id + " was deleted");
-        } else{
+        } else {
             System.out.println("Customer with ID " + id + " not exist");
 
         }

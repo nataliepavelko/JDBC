@@ -61,12 +61,12 @@ public class Developer {
     }
     @Override
     public String toString() {
-        return "Developer{" +
-                "id =" + id +
-                ", name ='" + name + '\'' +
-                ", surname ='" + surname + '\'' +
-                ", sex ='" + sex + '\'' +
-                ", salary=" + salary +
+        return "Developer{ " +
+                "id = " + id +
+                ", name = '" + name + '\'' +
+                ", surname = '" + surname + '\'' +
+                ", sex = '" + sex + '\'' +
+                ", salary= " + salary +
                 '}';
     }
 }

@@ -21,7 +21,7 @@ public class ProjectCommands implements Commands {
     public void desc() {
         System.out.println(" \n -- Menu of table Projects -- \n");
 
-        System.out.println("  Choose a number of command from the list, please : ");
+        System.out.println("   Choose a number of command from the list, please : ");
         System.out.println("1. Create new project ");
         System.out.println("2. Show info about project ");
         System.out.println("3. Update info for project ");
@@ -68,12 +68,12 @@ public class ProjectCommands implements Commands {
     @Override
     public void add() {
         System.out.println("Enter info for a new project");
-        System.out.print("Name - ");
+        System.out.println("Name - ");
         String name = scanner.next();
-        System.out.print("Cost - ");
+        System.out.println("Cost - ");
         double cost = scanner.nextDouble();
         scanner.nextLine();
-        System.out.print("Date - ");
+        System.out.println("Date - ");
         String dateString = scanner.nextLine();
 
         Project project = new Project();
@@ -104,11 +104,11 @@ public class ProjectCommands implements Commands {
     @Override
     public void update() {
         System.out.println("Enter information for project update");
-        System.out.print("ID -  ");
+        System.out.println("ID -  ");
         long id = scanner.nextInt();
-        System.out.print("Name - ");
+        System.out.println("Name - ");
         String name = scanner.next();
-        System.out.print("Cost - ");
+        System.out.println("Cost - ");
         double cost = scanner.nextDouble();
 
         Project project = new Project();
@@ -117,8 +117,8 @@ public class ProjectCommands implements Commands {
         project.setId(id);
         if (projectsDao.getById(id) != null) {
             projectsDao.update(project);
-            System.out.println("Project with id + " + id + " is updated");
-        } else{
+            System.out.println("Project with id " + id + " is updated");
+        } else {
             System.out.println("Project with ID " + id + " not exist");
         }
     }
@@ -126,7 +126,7 @@ public class ProjectCommands implements Commands {
     @Override
     public void showAll() {
         List<Project> projectList = projectsDao.getAll();
-        if(projectList != null) {
+        if (projectList != null) {
             projectList.forEach(project -> { System.out.println(project); });
         } else {
             System.out.println("Projects table is empty");
@@ -141,7 +141,7 @@ public class ProjectCommands implements Commands {
         if (projectsDao.getById(id) != null) {
             projectsDao.deleteById(id);
             System.out.println("Project with ID + " + id + " was deleted");
-        } else{
+        } else {
             System.out.println("Project with ID " + id + " not exist");
         }
     }

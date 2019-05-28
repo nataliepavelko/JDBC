@@ -34,7 +34,7 @@ public class CustomersDao {
             getByIdPS = connection.prepareStatement("SELECT name, phone FROM customers WHERE id =? ");
             updatePS = connection.prepareStatement("UPDATE customers SET name=?, phone=? WHERE id =?");
             getAllPS = connection.prepareStatement("SELECT id, name, phone FROM customers ");
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -47,8 +47,8 @@ public class CustomersDao {
         }
     }
 
-    private void setConnector () throws SQLException {
-        connection = DriverManager.getConnection(DB_Path, USER,PASSWORD);
+    private void setConnector() throws SQLException {
+        connection = DriverManager.getConnection(DB_Path, USER, PASSWORD);
         statement = connection.createStatement();
     }
 
@@ -68,13 +68,13 @@ public class CustomersDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try (ResultSet rs = getByIdPS.executeQuery()){
-            while (rs.first()){
+        try (ResultSet rs = getByIdPS.executeQuery()) {
+            while (rs.first()) {
                 return new Customer(id,
                         rs.getString("name"),
                         rs.getString("phone"));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -82,15 +82,15 @@ public class CustomersDao {
 
     public List<Customer> getAll() {
         List<Customer> customerList = new ArrayList<>();
-        try (ResultSet rs = getAllPS.executeQuery()){
-            while (rs.next()){
+        try (ResultSet rs = getAllPS.executeQuery()) {
+            while (rs.next()) {
                 customerList.add(new Customer(
                         rs.getLong("id"),
                         rs.getString("name"),
                         rs.getString("phone")
                 ));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return customerList;
