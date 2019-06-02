@@ -9,6 +9,8 @@ You need to create a console application based on the database from homework 1, 
 - output to console:
 
 
+
+
           - salary (amount) of all developers of a separate project;
      
           - list of developers of a separate project;
