@@ -1,15 +1,21 @@
 package hometask_jdbc.commands;
 
+import hometask_jdbc.db.DevelopersDao;
+import hometask_jdbc.db.DevelopersSkillsDao;
 import hometask_jdbc.db.SkillsDao;
+import hometask_jdbc.entity.Developer;
 import hometask_jdbc.entity.Skill;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class SkillsCommands implements Commands {
     private Scanner scanner = new Scanner(System.in);
     private SkillsDao skillsDao = new SkillsDao();
+    private DevelopersDao developersDao = new DevelopersDao();
+    private DevelopersSkillsDao developersSkillsDao = new DevelopersSkillsDao();
 
     public SkillsCommands() {
         desc();
@@ -56,7 +62,9 @@ public class SkillsCommands implements Commands {
             case "7":
                 System.out.println(" --------- Exit ---------");
                 skillsDao.close();
+                scanner.close();
                 break;
+
             default:
                 System.out.println("Unknown command. Please, try again. ");
                 desc();

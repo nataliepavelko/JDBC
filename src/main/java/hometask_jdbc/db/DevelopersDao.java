@@ -10,7 +10,7 @@ import java.util.List;
 import static hometask_jdbc.db.Connector.*;
 
 
-public class DevelopersDao {
+public class DevelopersDao implements AbstractDao <Developer, Long> {
     private PreparedStatement savePS;
     private PreparedStatement getByIdPS;
     private PreparedStatement updatePS;
@@ -55,6 +55,7 @@ public class DevelopersDao {
         statement = connection.createStatement();
     }
 
+    @Override
     public void save(Developer developer) throws SQLException {
         savePS.setString(1, developer.getName());
         savePS.setString(2, developer.getSurname());
@@ -67,6 +68,7 @@ public class DevelopersDao {
         developer.setId(maxDevId);
     }
 
+    @Override
     public Developer getById(Long id) {
         try {
             getByIdPS.setLong(1, id);
@@ -87,6 +89,7 @@ public class DevelopersDao {
         return null;
     }
 
+    @Override
     public List<Developer> getAll() {
         List<Developer> developerList = new ArrayList<>();
         try (ResultSet rs = getAllPS.executeQuery()) {
@@ -105,6 +108,7 @@ public class DevelopersDao {
         return developerList;
     }
 
+    @Override
     public void deleteById(Long id) {
         try {
             statement.executeUpdate("DELETE FROM developers WHERE id = " + id);
@@ -113,6 +117,7 @@ public class DevelopersDao {
         }
     }
 
+    @Override
     public void update(Developer developer) {
         try {
             updatePS.setString(1, developer.getName());
@@ -176,7 +181,9 @@ public class DevelopersDao {
                 "FROM developers d, skills s, developers_skills ds\n" +
                 "WHERE d.id = ds.id_developer\n" +
                 "AND s.id = ds.id_skill\n" +
-                "AND s.id in (1, 7, 8);";
+                "And s.name = 'Java'";
+                //"AND s.id in (1, 7, 8)";
+
         try (ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
                 developerList.add(new Developer(
@@ -200,7 +207,8 @@ public class DevelopersDao {
                 "FROM developers d, skills s, developers_skills ds\n" +
                 "WHERE d.id = ds.id_developer\n" +
                 "AND s.id = ds.id_skill\n" +
-                "AND s.id in (5, 7);";
+                "AND s.level = 'Middle'";
+                //"AND s.id in (5, 7);";
         try (ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
                 developerList.add(new Developer(
@@ -256,6 +264,7 @@ public class DevelopersDao {
         }
     }
 
+    @Override
     public void close() {
         try {
             statement.close();

@@ -1,6 +1,5 @@
 package hometask_jdbc.db;
 
-import hometask_jdbc.entity.Developer;
 import hometask_jdbc.entity.Project;
 
 import java.sql.*;
@@ -9,7 +8,7 @@ import java.util.List;
 
 import static hometask_jdbc.db.Connector.*;
 
-public class ProjectsDao {
+public class ProjectsDao implements AbstractDao <Project,Long> {
 
     private PreparedStatement savePS;
     private PreparedStatement getByIdPS;
@@ -53,6 +52,7 @@ public class ProjectsDao {
         statement = connection.createStatement();
     }
 
+    @Override
     public void save(Project project) throws SQLException {
         savePS.setString(1, project.getName());
         savePS.setDouble(2, project.getCost());
@@ -63,6 +63,7 @@ public class ProjectsDao {
         project.setId(maxProjectId);
     }
 
+    @Override
     public Project getById(Long id) {
         try {
             getByIdPS.setLong(1, id);
@@ -83,6 +84,7 @@ public class ProjectsDao {
         return null;
     }
 
+    @Override
     public List<Project> getAll() {
         List<Project> projectList = new ArrayList<>();
         try (ResultSet rs = getAllPS.executeQuery()) {
@@ -101,6 +103,7 @@ public class ProjectsDao {
         return projectList;
     }
 
+    @Override
     public void deleteById(Long id) {
         try {
             statement.executeUpdate("DELETE FROM projects WHERE id = " + id);
@@ -109,6 +112,7 @@ public class ProjectsDao {
         }
     }
 
+    @Override
     public void update(Project project) {
         try {
             updatePS.setString(1, project.getName());
@@ -137,6 +141,7 @@ public class ProjectsDao {
         }
     }
 
+    @Override
     public void close() {
         try {
             statement.close();

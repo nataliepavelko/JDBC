@@ -22,13 +22,14 @@ public class CustomerCommands implements Commands {
         System.out.println(" \n -- Menu of table Customers -- \n");
 
         System.out.println("   Choose a number of command from the list, please : ");
-        System.out.println("1. Create new company ");
-        System.out.println("2. Show info about company ");
-        System.out.println("3. Update info for company ");
-        System.out.println("4. Show all companies ");
-        System.out.println("5. Delete company ");
+        System.out.println("1. Create new customer ");
+        System.out.println("2. Show info about customer ");
+        System.out.println("3. Update info for customer ");
+        System.out.println("4. Show all customers ");
+        System.out.println("5. Delete customer ");
         System.out.println("6. Go to main menu ");
         System.out.println("7. Exit ");
+
 
         String command = scanner.next();
         switch (command) {
@@ -124,7 +125,6 @@ public class CustomerCommands implements Commands {
     @Override
     public void showAll() {
         List<Customer> customerList = customersDao.getAll();
-
         if (customerList != null) {
             customerList.forEach(customer -> {
                 System.out.println(customer);

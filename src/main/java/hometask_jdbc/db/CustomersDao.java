@@ -8,7 +8,7 @@ import java.util.List;
 
 import static hometask_jdbc.db.Connector.*;
 
-public class CustomersDao {
+public class CustomersDao implements AbstractDao <Customer, Long>{
 
     private PreparedStatement savePS;
     private PreparedStatement getByIdPS;
@@ -52,6 +52,7 @@ public class CustomersDao {
         statement = connection.createStatement();
     }
 
+    @Override
     public void save(Customer customer) throws SQLException {
         savePS.setString(1, customer.getName());
         savePS.setString(2, customer.getPhone());
@@ -62,6 +63,7 @@ public class CustomersDao {
         customer.setId(maxCustId);
     }
 
+    @Override
     public Customer getById(Long id) {
         try {
             getByIdPS.setLong(1, id);
@@ -80,6 +82,7 @@ public class CustomersDao {
         return null;
     }
 
+    @Override
     public List<Customer> getAll() {
         List<Customer> customerList = new ArrayList<>();
         try (ResultSet rs = getAllPS.executeQuery()) {
@@ -96,6 +99,7 @@ public class CustomersDao {
         return customerList;
     }
 
+    @Override
     public void deleteById(Long id) {
         try {
             statement.executeUpdate("DELETE FROM customers WHERE id = " + id);
@@ -104,6 +108,7 @@ public class CustomersDao {
         }
     }
 
+    @Override
     public void update(Customer customers) {
         try {
             updatePS.setString(1, customers.getName());
@@ -131,6 +136,7 @@ public class CustomersDao {
         }
     }
 
+    @Override
     public void close() {
         try {
             statement.close();

@@ -1,9 +1,13 @@
 package hometask_jdbc.commands;
 
 import hometask_jdbc.db.CompaniesDao;
+import hometask_jdbc.db.CompaniesProjectsDao;
+import hometask_jdbc.db.ProjectsDao;
 import hometask_jdbc.entity.Company;
+import hometask_jdbc.entity.Project;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,6 +15,8 @@ public class CompanyCommands implements Commands {
 
     private CompaniesDao companiesDao = new CompaniesDao();
     private Scanner scanner = new Scanner(System.in);
+    private ProjectsDao projectsDao = new ProjectsDao();
+    private CompaniesProjectsDao companysProjectsDao = new CompaniesProjectsDao();
 
     public CompanyCommands() {
         desc();
@@ -26,8 +32,13 @@ public class CompanyCommands implements Commands {
         System.out.println("3. Update info for company ");
         System.out.println("4. Show all companies ");
         System.out.println("5. Delete company ");
-        System.out.println("6. Go to main menu ");
-        System.out.println("7. Exit ");
+        System.out.println("6. Show company by id project ");
+        System.out.println("7. Show all projects of company ");
+        System.out.println("8. Insert projects to company ");
+        System.out.println("9. Go to main menu ");
+
+        System.out.println("10. Exit ");
+
 
         String command = scanner.next();
         switch (command) {
@@ -52,11 +63,26 @@ public class CompanyCommands implements Commands {
                 desc();
                 break;
             case "6":
-                new MainCommands();
+                getCompanyByIdProject();
+                desc();
                 break;
             case "7":
+                getAllProjectsOfCompany();
+                desc();
+                break;
+            case "8":
+                insertProjectsToCompany();
+                desc();
+                break;
+            case "9":
+                new MainCommands();
+                break;
+            case "10":
                 System.out.println(" --------- Exit ---------");
                 companiesDao.close();
+                companysProjectsDao.close();
+                projectsDao.close();
+                scanner.close();
                 break;
             default:
                 System.out.println("Unknown command. Please, try again. ");
@@ -124,11 +150,59 @@ public class CompanyCommands implements Commands {
     public void showAll() {
         List<Company> companyList = companiesDao.getAll();
         if (companyList != null) {
-            companyList.forEach(company -> {
-                System.out.println(company);
-            });
+            companyList.forEach(company -> { System.out.println(company); });
         } else {
             System.out.println("Companies table is empty");
+        }
+    }
+    private void getCompanyByIdProject() {
+        showProjects();
+        System.out.println("Enter id project");
+        System.out.println("ID - ");
+        long id = scanner.nextInt();
+        Company company  = companysProjectsDao.getCompanyByIdProject(id);
+        System.out.println(company);
+    }
+
+
+    private void getAllProjectsOfCompany() {
+        showAll();
+        System.out.println("Enter id company");
+        System.out.println("ID - ");
+        long id = scanner.nextInt();
+        List <Project> projectList = companysProjectsDao.getProjectsByIdCompany(id);
+        if(projectList != null){
+            projectList.forEach(project -> { System.out.println(project); });
+        } else {
+            System.out.println("There are no projects by id company " + id);
+        }
+    }
+
+    private void insertProjectsToCompany() {
+        showProjects();
+        System.out.println("Enter ID's of projects");
+        scanner.nextLine();
+        String strings = scanner.nextLine();
+        String[] arrayId = strings.split(" ");
+        List<Long> projectsIds = new ArrayList<>();
+
+        for (String ID : arrayId){
+            projectsIds.add(Long.parseLong(ID));
+        }
+        showAll();
+        System.out.println("Enter ID of a company");
+        long id_company = scanner.nextInt();
+
+        companysProjectsDao.setProjectsToDCompany(projectsIds, id_company);
+        companysProjectsDao.getProjectsByIdCompany(id_company);
+    }
+
+    private void showProjects() {
+        List <Project> projectList = projectsDao.getAll();
+        if (projectList != null) {
+            projectList.forEach(project -> { System.out.println(project); });
+        } else {
+            System.out.println("Projects table is empty");
         }
     }
 
@@ -142,7 +216,6 @@ public class CompanyCommands implements Commands {
             System.out.println("Company with ID + " + id + " was deleted");
         } else {
             System.out.println("Company with ID " + id + " not exist");
-
         }
     }
 }

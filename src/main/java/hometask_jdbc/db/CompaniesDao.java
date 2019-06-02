@@ -52,6 +52,7 @@ public class CompaniesDao implements AbstractDao<Company, Long> {
         statement = connection.createStatement();
     }
 
+    @Override
     public void save(Company company) throws SQLException {
         savePS.setString(1, company.getName());
         savePS.setString(2, company.getAddress());
@@ -61,6 +62,7 @@ public class CompaniesDao implements AbstractDao<Company, Long> {
         company.setId(maxCompanyId);
     }
 
+    @Override
     public Company getById(Long id) {
         try {
             getByIdPS.setLong(1, id);
@@ -80,6 +82,7 @@ public class CompaniesDao implements AbstractDao<Company, Long> {
         return null;
     }
 
+    @Override
     public List<Company> getAll() {
         List<Company> companyList = new ArrayList<>();
         try (ResultSet rs = getAllPS.executeQuery()) {
@@ -96,6 +99,7 @@ public class CompaniesDao implements AbstractDao<Company, Long> {
         return companyList;
     }
 
+    @Override
     public void deleteById(Long id) {
         try {
             statement.executeUpdate("DELETE FROM companies WHERE id = " + id);
@@ -104,6 +108,7 @@ public class CompaniesDao implements AbstractDao<Company, Long> {
         }
     }
 
+    @Override
     public void update(Company company) {
         try {
             updatePS.setString(1, company.getName());
@@ -131,6 +136,7 @@ public class CompaniesDao implements AbstractDao<Company, Long> {
         }
     }
 
+    @Override
     public void close() {
         try {
             statement.close();

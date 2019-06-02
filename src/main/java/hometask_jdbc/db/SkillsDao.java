@@ -8,7 +8,7 @@ import java.util.List;
 
 import static hometask_jdbc.db.Connector.*;
 
-public class SkillsDao {
+public class SkillsDao implements AbstractDao <Skill, Long>{
 
     private PreparedStatement savePS;
     private PreparedStatement getByIdPS;
@@ -53,6 +53,7 @@ public class SkillsDao {
         statement = connection.createStatement();
     }
 
+    @Override
     public void save(Skill skill) throws SQLException {
         savePS.setString(1, skill.getName());
         savePS.setString(2, skill.getLevel());
@@ -63,6 +64,7 @@ public class SkillsDao {
     }
 
 
+    @Override
     public Skill getById(Long id) {
         try {
             getByIdPS.setLong(1, id);
@@ -82,6 +84,7 @@ public class SkillsDao {
         return null;
     }
 
+    @Override
     public List<Skill> getAll() {
         List<Skill> skillList = new ArrayList<>();
         try (ResultSet rs = getAllPS.executeQuery()) {
@@ -98,6 +101,7 @@ public class SkillsDao {
         return skillList;
     }
 
+    @Override
     public void deleteById(Long id) {
         try {
             statement.executeUpdate("DELETE FROM skills WHERE id = " + id);
@@ -106,6 +110,7 @@ public class SkillsDao {
         }
     }
 
+    @Override
     public void update(Skill skill) {
         try {
             updatePS.setString(1, skill.getName());
@@ -132,6 +137,7 @@ public class SkillsDao {
         }
     }
 
+    @Override
     public void close() {
         try {
             statement.close();

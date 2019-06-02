@@ -44,9 +44,10 @@ public class MainCommands {
                 break;
             case "7":
                 System.out.println(" --------- Exit ---------");
+                scanner.close();
                 break;
             default:
-                System.out.println("Unknown command. Try again. ");
+                System.out.println("Unknown command. Please try again. ");
                 desc();
         }
     }

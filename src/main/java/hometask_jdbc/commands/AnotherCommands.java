@@ -80,14 +80,14 @@ public class AnotherCommands {
         } else {
             System.out.println("Projects table is empty");
         }
-        System.out.print("ID - ");
+        System.out.println("ID - ");
         long id = scanner.nextInt();
         Project project = projectsDao.getById(id);
 
         if (project != null) {
             if (developerList != null) {
                 int sum = developersDao.getSumSalaryDevelopers(id);
-                System.out.println("Sum salary for " + developerList.size() + "developers id " + sum);
+                System.out.println("Sum salary for developers id " + id + " is " + sum);
             } else {
                 System.out.println("Developers table is empty");
             }
@@ -107,7 +107,7 @@ public class AnotherCommands {
         } else {
             System.out.println("Projects table is empty");
         }
-        System.out.print("ID - ");
+        System.out.println("ID - ");
         long id = scanner.nextInt();
         Project project = projectsDao.getById(id);
         List<Developer> developerList = developersDao.getAllDevelopersOfProject(id);
@@ -115,9 +115,7 @@ public class AnotherCommands {
         if (project != null) {
             if (developerList != null) {
                 System.out.println("");
-                developerList.forEach(developer -> {
-                    System.out.println(developer);
-                });
+                developerList.forEach(developer -> { System.out.println(developer); });
             } else {
                 System.out.println("Developers table is empty");
             }
@@ -148,7 +146,6 @@ public class AnotherCommands {
             System.out.println("Middle developers not exist");
         }
     }
-
 
     private void amountDevelopersOfProject() {
         List projectList = developersDao.getListProjectAmountDevelopers();
